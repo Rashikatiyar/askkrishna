@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ask Krishna</title>
+  <link rel="stylesheet" href="bg.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <h1>Ask Krishna</h1>
+    <p>Seek wisdom from the eternal teachings of the Bhagavad Gita</p>
+  </header>
+
+  <!-- ===== QUOTES SECTION ===== -->
+  <section class="quotes-section">
+    <div class="quote-card">
+      <img src="krishna1.jpg" alt="Quote 1">
+      <p>
+        "You have the right to perform your actions, but you are not entitled to the fruits of action."
+        <small>- Chapter 2, Verse 47</small>
+      </p>
+    </div>
+
+    <div class="quote-card">
+      <img src="krishna2.jpg" alt="Quote 2">
+      <p>
+        "The mind is restless and difficult to restrain, but it is subdued by practice."
+        <small>- Chapter 6, Verse 35</small>
+      </p>
+    </div>
+
+    <div class="quote-card">
+      <img src="krishna3.jpg" alt="Quote 3">
+      <p>
+        "When meditation is mastered, the mind is unwavering like the flame of a lamp in a windless place."
+        <small>- Chapter 6, Verse 19</small>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    &copy; 2025 Ask Krishna | Inspired by the Bhagavad Gita
+  </footer>
+
+  <!-- ===== CHATBOX ===== -->
+  <div class="chatbox" id="chatbox">
+    <div class="chatbox-header">
+      <span>💬 Ask Krishna</span>
+      <button id="closeChat" aria-label="Close">×</button>
+    </div>
+    <div class="chatbox-messages" id="messages">
+      <div class="msg bot">
+        Hare Krishna! Ask me anything with devotion — I’ll answer with the wisdom of the Gita. 🌼
+      </div>
+    </div>
+    <form class="chatbox-input" id="chatForm">
+      <input type="text" id="chatInput" placeholder="Type your question..." autocomplete="off" required />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <!-- Open Chat Button -->
+  <button class="chatbot-button" id="openChatBtn">
+    💬 Chat with Krishna
+  </button>
+
+  <script src="bg.js"></script>
+
+</body>
+</html>

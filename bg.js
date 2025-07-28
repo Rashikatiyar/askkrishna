@@ -5,14 +5,6 @@ const form = document.getElementById('chatForm');
 const input = document.getElementById('chatInput');
 const messages = document.getElementById('messages');
 
-const gitaReplies = [
-  'Perform your duty, but do not be attached to the results. (2.47)',
-  'The mind is restless, but it can be controlled by practice and detachment. (6.35)',
-  'You are what you believe in. You become that which you believe you can become.',
-  'Set thy heart upon thy work, but never on its reward. (2.47)',
-  'Peace comes from within. Do not seek it without.',
-];
-
 function addMessage(text, who = 'bot') {
   const div = document.createElement('div');
   div.className = 'msg ' + who;
@@ -21,12 +13,36 @@ function addMessage(text, who = 'bot') {
   messages.scrollTop = messages.scrollHeight;
 }
 
-function botReply(userText) {
-  const t = userText.toLowerCase();
-  if (t.includes('karma')) return 'Do your karma without attachment to results, Arjuna. (2.47)';
-  if (t.includes('mind')) return 'The mind is restless, but it is subdued by practice. (6.35)';
-  if (t.includes('fear')) return 'Abandon all fear and surrender to Me. I will protect you. (18.66)';
-  return gitaReplies[Math.floor(Math.random() * gitaReplies.length)];
+function showTyping() {
+  const typing = document.createElement('div');
+  typing.className = 'msg bot typing';
+  typing.textContent = 'Krishna is thinking...';
+  typing.id = 'typing';
+  messages.appendChild(typing);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function hideTyping() {
+  const typing = document.getElementById('typing');
+  if (typing) typing.remove();
+}
+
+async function botReply(userText) {
+  showTyping();
+  try {
+    const res = await fetch('https://your-backend-url.onrender.com/ask', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: userText })
+    });
+
+    const data = await res.json();
+    hideTyping();
+    return data.reply || "I'm not sure how to answer that from the Gita.";
+  } catch (err) {
+    hideTyping();
+    return "Something went wrong. Please try again later.";
+  }
 }
 
 openBtn.addEventListener('click', () => {
@@ -38,13 +54,12 @@ closeBtn.addEventListener('click', () => {
   chatbox.classList.remove('open');
 });
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const text = input.value.trim();
   if (!text) return;
   addMessage(text, 'user');
   input.value = '';
-  setTimeout(() => {
-    addMessage(botReply(text), 'bot');
-  }, 400);
+  const reply = await botReply(text);
+  addMessage(reply, 'bot');
 });

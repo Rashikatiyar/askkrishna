@@ -30,7 +30,7 @@ function hideTyping() {
 async function botReply(userText) {
   showTyping();
   try {
-    const res = await fetch('https://your-backend-url.onrender.com/ask', {
+    const res = await fetch('https://askkrishnabackend.onrender.com', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: userText })
